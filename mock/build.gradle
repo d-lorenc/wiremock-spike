@@ -1,0 +1,46 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath "eu.appsatori:gradle-fatjar-plugin:0.3"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eu.appsatori.fatjar'
+
+jar {
+	baseName = 'mock'
+	version = '0.0.1-SNAPSHOT'
+}
+
+fatJar {
+    manifest {
+        attributes 'Main-Class': 'com.github.tomakehurst.wiremock.standalone.WireMockServerRunner'
+    }
+    exclude 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/*.SF'
+}
+
+sourceCompatibility = 1.8
+
+task run (type: JavaExec, dependsOn: classes){
+    args(["--port", "8089", "--verbose", "--root-dir", "src/main/resources"])
+    main = "com.github.tomakehurst.wiremock.standalone.WireMockServerRunner"
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task record (type: JavaExec, dependsOn: classes, run){
+    doFirst {
+        args(["--port", "8089", "--verbose", "--root-dir", "src/main/resources", "--record-mappings", "--proxy-all=http://localhost:8081"])
+    }
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile('com.github.tomakehurst:wiremock:2.5.0')
+}

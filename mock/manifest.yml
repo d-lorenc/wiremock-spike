@@ -1,0 +1,5 @@
+---
+applications:
+  - name: wiremock-spike
+    buildpack: java_buildpack
+    path: build/libs/mock.jar

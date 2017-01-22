@@ -1,0 +1,16 @@
+{
+  "id" : "9464c19b-233d-3f7b-8a83-6bd08b4fe337",
+  "request" : {
+    "url" : "/hello",
+    "method" : "GET"
+  },
+  "response" : {
+    "status" : 200,
+    "bodyFileName" : "body-hello-6mmYh.txt",
+    "headers" : {
+      "Content-Type" : "text/plain;charset=UTF-8",
+      "Date" : "Sat, 21 Jan 2017 09:20:50 GMT"
+    }
+  },
+  "uuid" : "9464c19b-233d-3f7b-8a83-6bd08b4fe337"
+}
